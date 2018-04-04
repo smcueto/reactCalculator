@@ -20,7 +20,7 @@ class Calculator extends Component {
   }
 
   onEvaluatePressed() {
-    const result = eval(this.state.expression);
+    const result = calculate(this.state.expression);
     this.setState({expression: result.toString()});
   }
 
