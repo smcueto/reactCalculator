@@ -1,25 +1,33 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import Calculator from './Calculator';
-import './App.css';
+import React from 'react';
+import Display from '/Display';
+import ButtonPanel from '/ButtonPanel';
+import calculate from '/Calculate';
 
-class App extends Component {
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      total: null,
+      next: null,
+      operation: null,
+    };
+  }
+
+  handleClick = (buttonName) => {
+    this.setState(calculate(this.state, buttonName));
+  }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">React Calculator</h1>
-          <img src={logo} className="App-logo" alt="Calculator" />
-        </header>
-        <p className="App-intro">
-          Try out my first React Calculator!
-        </p>
-      <Calculator />
-
+      <div className="component-app">
+        <Display
+          value={this.state.next || this.state.total || '0'}
+        />
+        <ButtonPanel
+          clickHandler={this.handleClick}
+        />
       </div>
     );
   }
-
 }
-
 export default App;
